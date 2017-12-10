@@ -1,0 +1,25 @@
+<div class="container">
+  <h3>Welcome to Channel: {{ channelName }}</h3>
+  You are: <b>{{userId}}</b>; Your mood is :
+  <select [(ngModel)]="mood" (ngModelChange)="updateMood($event)" >
+    <option value="happy">happy</option>
+    <option value="neutral">neutral</option>
+    <option value="sad">sad</option>
+  </select>
+  <br />
+  <div class="well">
+    <p>Users Online ({{ usersConnected }})</p>
+    <ul *ngIf="usersConnected > 0">
+      <li *ngFor="let o of occupants">{{ o.uuid }} ({{o.state?.mood}})</li>
+    </ul>
+  </div>
+  <hr/>
+  <p>Enter a new message:</p>
+  <input type="text" [(ngModel)]="newMessage" >
+  <button class="btn btn-primary" (click)="publish()">Send!</button>
+  <br/>
+  <br/>
+  <ul *ngIf="messages" class="list-unstyled">
+    <li *ngFor="let item of messages">{{ item.message }}</li>
+  </ul>
+</div>
